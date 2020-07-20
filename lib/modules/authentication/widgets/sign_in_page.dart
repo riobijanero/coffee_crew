@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'authentication_controller.dart';
 import '../../../common/constants/constants.dart';
 import '../../../common/widgets/loading_screen.dart';
+import '../../../common/widgets/animation_effect.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -37,53 +38,55 @@ class _SignInPageState extends State<SignInPage> {
                   )
                 ],
               ),
-              body: Container(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(height: 20.0),
-                        TextFormField(
-                          decoration:
-                              textInputDecoration.copyWith(hintText: 'Email'),
-                          validator: (value) => _authenticationController
-                              .validateEmailField(value),
-                          onChanged: (value) => setState(() => email = value),
-                        ),
-                        SizedBox(height: 20.0),
-                        TextFormField(
-                          decoration: textInputDecoration.copyWith(
-                              hintText: 'Password'),
-                          validator: (value) => _authenticationController
-                              .validatePasswordField(value),
-                          onChanged: (value) {
-                            setState(() => password = value);
-                          },
-                        ),
-                        SizedBox(height: 20.0),
-                        RaisedButton(
-                          color: Colors.pink[400],
-                          onPressed: () async {
-                            if (_formKey.currentState.validate()) {
-                              _authenticationController.onSignInButtonPressed(
-                                  email, password);
-                            }
-                          },
-                          child: Text(
-                            'Sign in',
-                            style: TextStyle(color: Colors.white),
+              body: AnimationEffect(
+                child: Container(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(height: 20.0),
+                          TextFormField(
+                            decoration:
+                                textInputDecoration.copyWith(hintText: 'Email'),
+                            validator: (value) => _authenticationController
+                                .validateEmailField(value),
+                            onChanged: (value) => setState(() => email = value),
                           ),
-                        ),
-                        SizedBox(height: 12.0),
-                        Text(
-                          _authenticationController.signInErrorMessage,
-                          style: TextStyle(color: Colors.red, fontSize: 14.0),
-                        )
-                      ],
-                    ),
-                  )),
+                          SizedBox(height: 20.0),
+                          TextFormField(
+                            decoration: textInputDecoration.copyWith(
+                                hintText: 'Password'),
+                            validator: (value) => _authenticationController
+                                .validatePasswordField(value),
+                            onChanged: (value) {
+                              setState(() => password = value);
+                            },
+                          ),
+                          SizedBox(height: 20.0),
+                          RaisedButton(
+                            color: Colors.pink[400],
+                            onPressed: () async {
+                              if (_formKey.currentState.validate()) {
+                                _authenticationController.onSignInButtonPressed(
+                                    email, password);
+                              }
+                            },
+                            child: Text(
+                              'Sign in',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          SizedBox(height: 12.0),
+                          Text(
+                            _authenticationController.signInErrorMessage,
+                            style: TextStyle(color: Colors.red, fontSize: 14.0),
+                          )
+                        ],
+                      ),
+                    )),
+              ),
             );
     });
   }
