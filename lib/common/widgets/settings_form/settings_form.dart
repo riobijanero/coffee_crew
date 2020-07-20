@@ -1,9 +1,10 @@
-import 'package:coffee_crew/models/user.dart';
-import 'package:coffee_crew/services/database_service.dart';
-import 'package:coffee_crew/shared/constants.dart';
-import 'package:coffee_crew/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../models/user.dart';
+import '../../../services/database_service.dart';
+import '../../constants/constants.dart';
+import '../loading_screen.dart';
 
 class SettingsForm extends StatefulWidget {
   @override
