@@ -17,7 +17,8 @@ class _CoffeeListState extends State<CoffeeList> with TickerProviderStateMixin {
 
   Duration _listRenderDelayDuration = Duration(milliseconds: 150);
 
-  bool hasListViewAnimatedAlready = false;
+  bool hasListViewAnimatedAlready;
+  int animatedlistItems = 0;
   bool mounted = true;
 
   void populateListWithDelay() async {
@@ -36,8 +37,8 @@ class _CoffeeListState extends State<CoffeeList> with TickerProviderStateMixin {
       } catch (e) {
         print(e);
       }
+      animatedlistItems++;
     }
-    hasListViewAnimatedAlready = true;
   }
 
   void _insertSingleItem(Coffee item, int index) {
@@ -46,21 +47,49 @@ class _CoffeeListState extends State<CoffeeList> with TickerProviderStateMixin {
     _listKey.currentState.insertItem(insertIndex);
   }
 
+  void _removeSingleItem(Coffee coffee) {
+    int indexOfItem = _coffeeList.indexOf(coffee);
+    Coffee removedItem = _coffeeList.removeAt(indexOfItem);
+
+    _listKey.currentState.removeItem(
+        indexOfItem,
+        (context, animation) => AnimationEffect(
+            child: CoffeeTile(coffee: removedItem),
+            animationDouble: animation));
+  }
+
   @override
   Widget build(BuildContext context) {
     _coffeeList = Provider.of<List<Coffee>>(context) ?? [];
-    populateListWithDelay();
-    return AnimatedList(
-      key: _listKey,
-      initialItemCount: _initialList.length,
-      itemBuilder: (context, index, animation) {
-        return AnimationEffect(
-          animationDouble: animation,
-          child: CoffeeTile(coffee: _coffeeList[index]),
-        );
-      },
-    );
+    hasListViewAnimatedAlready = animatedlistItems == _coffeeList.length;
+
+    if (hasListViewAnimatedAlready) {
+      return ListView(
+        key: _listKey,
+        children: _coffeeList.map((item) => CoffeeTile(coffee: item)).toList(),
+      );
+    } else {
+      populateListWithDelay();
+      return AnimatedList(
+        key: _listKey,
+        initialItemCount: _initialList.length,
+        itemBuilder: (context, index, animation) {
+          return AnimationEffect(
+            animationDouble: animation,
+            child: CoffeeTile(coffee: _coffeeList[index]),
+          );
+        },
+      );
+    }
   }
+
+  // Widget buildDismissbleItem(Widget listItem) {
+  //   // int indexOfItem = _coffeeList.indexOf(listItem);
+
+  //   // Coffee removedItem = _coffeeList.removeAt(listItem);
+  //   return Dismissible(
+  //       key: Key(listItem.toString()), onDismissed: (direction) => null, child: ,);
+  // }
 
   void _removeAllItems() {
     final length = _initialList.length;
@@ -79,6 +108,7 @@ class _CoffeeListState extends State<CoffeeList> with TickerProviderStateMixin {
     super.dispose();
 
     mounted = false;
+    hasListViewAnimatedAlready = false;
 
     _initialList.clear();
   }
