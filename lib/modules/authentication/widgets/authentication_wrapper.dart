@@ -9,9 +9,11 @@ class AuthenticationWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AuthenticationController>(
         builder: (context, _authenticationController, child) {
-      return _authenticationController.showSignIn
-          ? SignInPage()
-          : RegisterPage();
+      return AnimatedSwitcher(
+          duration: Duration(milliseconds: 500),
+          child: _authenticationController.showSignIn
+              ? SignInPage()
+              : RegisterPage());
     });
   }
 }

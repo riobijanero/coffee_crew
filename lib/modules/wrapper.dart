@@ -8,13 +8,9 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-    print(user);
-    // return home or authenticate widget
-
-    if (user == null) {
-      return AuthenticationWrapper();
-    } else {
-      return Dashboard();
-    }
+    return AnimatedSwitcher(
+      duration: Duration(milliseconds: 500),
+      child: (user == null) ? AuthenticationWrapper() : Dashboard(),
+    );
   }
 }
