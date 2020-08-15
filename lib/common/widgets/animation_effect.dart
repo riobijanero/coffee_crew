@@ -38,7 +38,7 @@ class _AnimationEffectState extends State<AnimationEffect>
     );
 
     _slideAnimation = Tween<Offset>(
-      begin: Offset(0, 0.6),
+      begin: Offset(0, 0.8),
       end: Offset.zero,
     ).animate(_curvedAnimation);
 
