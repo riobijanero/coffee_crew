@@ -26,7 +26,8 @@ class DatabaseService {
         .map((doc) => Coffee(
             name: doc?.data['name'] ?? '',
             sugars: doc?.data['sugars'] ?? '0',
-            strength: doc?.data['strength'] ?? 0))
+            strength: doc?.data['strength'] ?? 0,
+            isMyCoffee: true))
         .toList();
   }
 
