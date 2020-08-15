@@ -10,7 +10,8 @@ class DashBoardController {
   final AuthService _authService = AuthService();
   final String appBarTitle = 'Coffe Crew';
   final String logOutButtonLabel = 'Log out';
-  final String settingsButtonLabel = 'Settings';
+  final String settingsButtonLabel = 'Edit my Order';
+  bool wasListAnimatedAlready = false;
 
   Future<void> onSignOutButtonPressed() async {
     await _authService.signOut();
