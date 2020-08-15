@@ -3,22 +3,33 @@ import 'package:flutter/material.dart';
 
 class CoffeeTile extends StatelessWidget {
   final Coffee coffee;
+  final bool isMyCoffee;
+  final Function onTap;
 
-  const CoffeeTile({this.coffee});
+  const CoffeeTile({this.coffee, this.isMyCoffee, this.onTap});
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: EdgeInsets.only(top: 8.0),
-      child: Card(
-        margin: EdgeInsets.only(left: 20.0, top: 6.0, right: 6.0, bottom: 0.0),
-        child: ListTile(
-          leading: CircleAvatar(
-            radius: 25.0,
-            backgroundColor: Colors.brown[coffee.strength],
-            backgroundImage: AssetImage('assets/coffee_icon.png'),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Card(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
           ),
-          title: Text(coffee.name),
-          subtitle: Text('Takes ${coffee.sugars} sugar(s)'),
+          margin:
+              EdgeInsets.only(left: 15.0, top: 6.0, right: 15.0, bottom: 0.0),
+          child: ListTile(
+            trailing: (isMyCoffee != null) ? Text('Edit My Order') : null,
+            leading: CircleAvatar(
+              radius: 25.0,
+              backgroundColor: Colors.brown[coffee.strength],
+              backgroundImage: AssetImage('assets/coffee_icon.png'),
+            ),
+            title: Text(coffee.name),
+            subtitle: Text('Takes ${coffee.sugars} sugar(s)'),
+          ),
         ),
       ),
     );
