@@ -23,22 +23,22 @@ class _RegisterPageState extends State<RegisterPage>
 
   void initState() {
     super.initState();
-    _loginButtonController = new AnimationController(
-        duration: new Duration(milliseconds: 1000), vsync: this);
+    _loginButtonController = AnimationController(
+        duration: Duration(milliseconds: 1000), vsync: this);
 
-    buttonSqueezeAnimation = new Tween(
+    buttonSqueezeAnimation = Tween(
       begin: 320.0,
       end: 70.0,
-    ).animate(new CurvedAnimation(
+    ).animate(CurvedAnimation(
         parent: _loginButtonController,
-        curve: new Interval(0.0, 0.250, curve: Curves.linearToEaseOut)));
+        curve: Interval(0.0, 0.250, curve: Curves.linearToEaseOut)));
 
-    buttonZoomoutAnimation = new Tween(
+    buttonZoomoutAnimation = Tween(
       begin: 70.0,
       end: 1000.0,
-    ).animate(new CurvedAnimation(
+    ).animate(CurvedAnimation(
       parent: _loginButtonController,
-      curve: new Interval(0.550, 0.900, curve: Curves.bounceOut),
+      curve: Interval(0.550, 0.900, curve: Curves.bounceOut),
     ));
   }
 
