@@ -4,13 +4,13 @@ const textInputDecoration1 = InputDecoration(
   fillColor: Colors.white,
   filled: true,
   enabledBorder: OutlineInputBorder(
-    borderSide: BorderSide(
+    borderSide: const BorderSide(
       color: Colors.white,
       width: 2.0,
     ),
   ),
   focusedBorder: OutlineInputBorder(
-    borderSide: BorderSide(
+    borderSide: const BorderSide(
       color: Colors.pink,
       width: 2.0,
     ),
@@ -18,54 +18,61 @@ const textInputDecoration1 = InputDecoration(
 );
 
 final textInputDecoration = InputDecoration(
-  fillColor: Color(0xFF6CA8F1),
   filled: true,
   border: textFormFieldWhiteBorder,
   enabledBorder: textFormFieldWhiteBorder,
-  focusedBorder: textFormFieldWhiteBorder,
+  focusedBorder: textFormFieldFocusedBorder,
   errorBorder: textFormFieldErrorBorder,
   errorStyle: textFormFieldErrorMessageStyle,
   hintStyle: textFormFieldHintTextStyle,
-  contentPadding: EdgeInsets.symmetric(vertical: 25.0, horizontal: 10.0),
+  contentPadding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
 );
 
 final OutlineInputBorder textFormFieldWhiteBorder = OutlineInputBorder(
   borderRadius: BorderRadius.circular(15.0),
-  borderSide: BorderSide(
+  borderSide: const BorderSide(
     color: Colors.white70,
     width: 2.0,
   ),
 );
 
-final OutlineInputBorder textFormFieldErrorBorder = OutlineInputBorder(
+final OutlineInputBorder textFormFieldFocusedBorder = OutlineInputBorder(
   borderRadius: BorderRadius.circular(15.0),
-  borderSide: BorderSide(
+  borderSide: const BorderSide(
+    color: Colors.white,
+    width: 2.4,
+  ),
+);
+
+OutlineInputBorder textFormFieldErrorBorder = OutlineInputBorder(
+  borderRadius: BorderRadius.circular(15.0),
+  borderSide: const BorderSide(
     color: Colors.red,
     width: 2.0,
   ),
 );
 
-final TextStyle textFormFieldFontStyle = TextStyle(
+const TextStyle textFormFieldFontStyle = TextStyle(
   color: Colors.white,
 );
 
-final textFormFieldHintTextStyle = TextStyle(
+const textFormFieldHintTextStyle = TextStyle(
   color: Colors.white54,
   fontFamily: 'OpenSans',
 );
 
-final TextStyle textFormFieldErrorMessageStyle = TextStyle(
+const TextStyle textFormFieldErrorMessageStyle = TextStyle(
   fontSize: 14.0,
 );
 
-final textFormFieldLabelStyle = TextStyle(
+const textFormFieldLabelStyle = TextStyle(
   fontSize: 16,
   color: Colors.white,
   fontWeight: FontWeight.bold,
   fontFamily: 'OpenSans',
 );
 
-final BoxDecoration backgroundDecoration = BoxDecoration(
+const BoxDecoration backgroundDecoration = BoxDecoration(
   gradient: LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
