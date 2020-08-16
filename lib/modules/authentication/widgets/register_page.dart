@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './authentication_controller.dart';
 import '../../../common/widgets/animated_loading_button.dart';
-import '../../../common/constants/constants.dart';
+import 'package:coffee_crew/common/widgets/labeled_textfield.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -12,10 +12,16 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage>
     with TickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _passwordController = TextEditingController();
+
+  final TextEditingController _repeatPasswordController =
+      TextEditingController();
 
   String email = '';
   String password = '';
+  String repeatPassword = '';
   AnimationController _loginButtonController;
+  bool _passwordVisible;
 
   Animation<double> buttonSqueezeAnimation;
 
@@ -23,6 +29,7 @@ class _RegisterPageState extends State<RegisterPage>
 
   void initState() {
     super.initState();
+    _passwordVisible = false;
     _loginButtonController = AnimationController(
         duration: Duration(milliseconds: 1000), vsync: this);
 
@@ -96,55 +103,70 @@ class _RegisterPageState extends State<RegisterPage>
                   ),
                 ),
                 SizedBox(height: 40.0),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Email',
-                      style: textFormFieldLabelStyle,
-                    ),
-                    SizedBox(height: 15.0),
-                    TextFormField(
-                      cursorColor: textFormFieldFontStyle.color,
-                      style: textFormFieldFontStyle,
-                      decoration: textInputDecoration.copyWith(
-                        hintText: 'Enter your Email',
-                        prefixIcon: Icon(
-                          Icons.email,
-                          color: Colors.white,
-                        ),
-                      ),
-                      validator: (value) =>
-                          _authenticationController.validateEmailField(value),
-                      onChanged: (value) => setState(() => email = value),
-                    ),
-                  ],
+                SizedBox(height: 20.0),
+                LabeledTextfield(
+                  labeltext: 'Email',
+                  hintText: 'Enter your Email',
+                  icon: Icon(Icons.email, color: Colors.white),
+                  obscureText: false,
+                  validator: (value) =>
+                      _authenticationController.validateEmailField(value),
+                  onChanged: (value) => setState(() => email = value),
                 ),
                 SizedBox(height: 20.0),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Password',
-                      style: textFormFieldLabelStyle,
-                    ),
-                    SizedBox(height: 15.0),
-                    TextFormField(
-                      style: textFormFieldFontStyle,
-                      cursorColor: textFormFieldFontStyle.color,
-                      obscureText: true,
-                      decoration: textInputDecoration.copyWith(
-                        hintText: 'Enter a Password',
-                        prefixIcon: Icon(
-                          Icons.lock,
-                          color: Colors.white,
-                        ),
+                LabeledTextfield(
+                  texteditController: _passwordController,
+                  labeltext: 'Password',
+                  hintText: 'Enter a Password',
+                  icon: Icon(
+                    Icons.lock,
+                    color: Colors.white,
+                  ),
+                  trailingIcon: IconButton(
+                      icon: Icon(
+                        _passwordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Colors.white70,
                       ),
-                      validator: (value) => _authenticationController
-                          .validatePasswordField(value),
-                      onChanged: (value) => setState(() => password = value),
-                    ),
-                  ],
+                      onPressed: () {
+                        setState(() {
+                          _passwordVisible = !_passwordVisible;
+                        });
+                      }),
+                  obscureText: !_passwordVisible,
+                  validator: (value) =>
+                      _authenticationController.validatePasswordField(value),
+                  onChanged: (value) => setState(() => password = value),
+                ),
+                SizedBox(height: 20.0),
+                LabeledTextfield(
+                  texteditController: _repeatPasswordController,
+                  labeltext: 'Repeat Password',
+                  hintText: 'Repeat Password',
+                  icon: Icon(
+                    Icons.lock,
+                    color: Colors.white,
+                  ),
+                  trailingIcon: IconButton(
+                      icon: Icon(
+                        _passwordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Colors.white70,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _passwordVisible = !_passwordVisible;
+                        });
+                      }),
+                  obscureText: !_passwordVisible,
+                  validator: (value) {
+                    return value != _passwordController.text
+                        ? 'Passwords don\'t match'
+                        : null;
+                  },
+                  onChanged: (value) => setState(() => repeatPassword = value),
                 ),
                 SizedBox(height: 40.0),
                 AnimatedLoadingButton(
@@ -192,81 +214,4 @@ class _RegisterPageState extends State<RegisterPage>
       );
     });
   }
-
-  // final _formKey = GlobalKey<FormState>();
-
-  // String email = '';
-  // String password = '';
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Consumer<AuthenticationController>(
-  //       builder: (context, _authenticationController, child) {
-  //     return _authenticationController.isRegistrationLoading
-  //         ? LoadingScreen()
-  //         : Scaffold(
-  //             backgroundColor: Colors.brown[100],
-  //             appBar: AppBar(
-  //               backgroundColor: Colors.brown[400],
-  //               elevation: 0.0,
-  //               title: Text('sign up to Coffee Crew'),
-  //               actions: <Widget>[
-  //                 FlatButton.icon(
-  //                   onPressed:
-  //                       _authenticationController.toggleViewRegisterSignIn,
-  //                   icon: Icon(Icons.person),
-  //                   label: Text('Sign in'),
-  //                 )
-  //               ],
-  //             ),
-  //             body: Container(
-  //                 padding:
-  //                     EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-  //                 child: Form(
-  //                   key: _formKey,
-  //                   child: Column(
-  //                     children: <Widget>[
-  //                       SizedBox(height: 20.0),
-  //                       TextFormField(
-  //                         decoration:
-  //                             textInputDecoration.copyWith(hintText: 'Email'),
-  //                         validator: (value) => _authenticationController
-  //                             .validateEmailField(value),
-  //                         onChanged: (value) => setState(() => email = value),
-  //                       ),
-  //                       SizedBox(height: 20.0),
-  //                       TextFormField(
-  //                         decoration: textInputDecoration.copyWith(
-  //                             hintText: 'Password'),
-  //                         obscureText: true,
-  //                         validator: (value) => _authenticationController
-  //                             .validatePasswordField(value),
-  //                         onChanged: (value) =>
-  //                             setState(() => password = value),
-  //                       ),
-  //                       SizedBox(height: 20.0),
-  //                       RaisedButton(
-  //                         color: Colors.pink[400],
-  //                         onPressed: () async {
-  //                           if (_formKey.currentState.validate()) {
-  //                             _authenticationController.onRegisterButtonPressed(
-  //                                 email, password);
-  //                           }
-  //                         },
-  //                         child: Text(
-  //                           'Register',
-  //                           style: TextStyle(color: Colors.white),
-  //                         ),
-  //                       ),
-  //                       SizedBox(height: 12.0),
-  //                       Text(
-  //                         _authenticationController.registrationErrorMessage,
-  //                         style: TextStyle(color: Colors.red, fontSize: 14.0),
-  //                       )
-  //                     ],
-  //                   ),
-  //                 )),
-  //           );
-  //   });
-  // }
 }

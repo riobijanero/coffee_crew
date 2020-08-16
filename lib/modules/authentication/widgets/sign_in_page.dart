@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'authentication_controller.dart';
 import '../../../common/widgets/animated_loading_button.dart';
-import '../../../common/constants/constants.dart';
+import '../../../common/widgets/labeled_textfield.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -15,6 +15,7 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
 
   String email = '';
   String password = '';
+  bool _passwordVisible;
   AnimationController _loginButtonController;
 
   Animation<double> buttonSqueezeAnimation;
@@ -23,12 +24,13 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
 
   void initState() {
     super.initState();
+    _passwordVisible = false;
     _loginButtonController = AnimationController(
         duration: Duration(milliseconds: 1000), vsync: this);
 
     buttonSqueezeAnimation = Tween(
       begin: 320.0,
-      end: 70.0,
+      end: 60.0,
     ).animate(CurvedAnimation(
         parent: _loginButtonController,
         curve: Interval(0.0, 0.250, curve: Curves.linearToEaseOut)));
@@ -96,55 +98,39 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
                   ),
                 ),
                 SizedBox(height: 40.0),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Email',
-                      style: textFormFieldLabelStyle,
-                    ),
-                    SizedBox(height: 15.0),
-                    TextFormField(
-                      cursorColor: textFormFieldFontStyle.color,
-                      style: textFormFieldFontStyle,
-                      decoration: textInputDecoration.copyWith(
-                        hintText: 'Enter your Email',
-                        prefixIcon: Icon(
-                          Icons.email,
-                          color: Colors.white,
-                        ),
-                      ),
-                      validator: (value) =>
-                          _authenticationController.validateEmailField(value),
-                      onChanged: (value) => setState(() => email = value),
-                    ),
-                  ],
+                LabeledTextfield(
+                  labeltext: 'Email',
+                  hintText: 'Enter your Email',
+                  icon: Icon(Icons.email, color: Colors.white),
+                  fillColor: Color(0xFF6CA8F1),
+                  validator: (value) =>
+                      _authenticationController.validateEmailField(value),
+                  onChanged: (value) => setState(() => email = value),
                 ),
                 SizedBox(height: 20.0),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Password',
-                      style: textFormFieldLabelStyle,
-                    ),
-                    SizedBox(height: 15.0),
-                    TextFormField(
-                      style: textFormFieldFontStyle,
-                      cursorColor: textFormFieldFontStyle.color,
-                      obscureText: true,
-                      decoration: textInputDecoration.copyWith(
-                        hintText: 'Enter your Password',
-                        prefixIcon: Icon(
-                          Icons.lock,
-                          color: Colors.white,
-                        ),
+                LabeledTextfield(
+                  labeltext: 'Password',
+                  hintText: 'Enter a Password',
+                  icon: Icon(
+                    Icons.lock,
+                    color: Colors.white,
+                  ),
+                  trailingIcon: IconButton(
+                      icon: Icon(
+                        _passwordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Colors.white70,
                       ),
-                      validator: (value) => _authenticationController
-                          .validatePasswordField(value),
-                      onChanged: (value) => setState(() => password = value),
-                    ),
-                  ],
+                      onPressed: () {
+                        setState(() {
+                          _passwordVisible = !_passwordVisible;
+                        });
+                      }),
+                  obscureText: !_passwordVisible,
+                  validator: (value) =>
+                      _authenticationController.validatePasswordField(value),
+                  onChanged: (value) => setState(() => password = value),
                 ),
                 SizedBox(height: 40.0),
                 AnimatedLoadingButton(
