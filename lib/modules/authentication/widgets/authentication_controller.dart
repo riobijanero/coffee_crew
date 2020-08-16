@@ -54,6 +54,10 @@ class AuthenticationController extends ChangeNotifier {
   }
 
   String validatePasswordField(String value) {
-    return value.length < 6 ? 'Enter a Password 6+ chars long' : null;
+    if (value.length < 6) {
+      return 'Enter a Password 6+ chars long';
+    } else {
+      return null;
+    }
   }
 }
