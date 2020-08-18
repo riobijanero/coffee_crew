@@ -30,7 +30,7 @@ class AnimatedProfilePicture extends StatelessWidget {
                     fontSize: 30.0,
                     letterSpacing: 1.2,
                     fontWeight: FontWeight.w300,
-                    color: Colors.black),
+                    color: Colors.white),
               ),
               SizedBox(height: 20),
               Container(
