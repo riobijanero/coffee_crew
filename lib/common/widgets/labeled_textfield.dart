@@ -34,7 +34,7 @@ class LabeledTextfield extends StatelessWidget {
           labeltext,
           style: textFormFieldLabelStyle,
         ),
-        SizedBox(height: 10.0),
+        const SizedBox(height: 10.0),
         TextFormField(
           keyboardType: TextInputType.text,
           obscureText: obscureText,

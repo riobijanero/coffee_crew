@@ -20,8 +20,8 @@ class CoffeeTile extends StatelessWidget {
             borderRadius: BorderRadius.circular(15.0),
             side: const BorderSide(color: Colors.white, width: 1.0),
           ),
-          margin:
-              EdgeInsets.only(left: 15.0, top: 6.0, right: 15.0, bottom: 0.0),
+          margin: const EdgeInsets.only(
+              left: 15.0, top: 6.0, right: 15.0, bottom: 0.0),
           child: ListTile(
             trailing: (isMyCoffee != null) ? Text('Edit My Order') : null,
             leading: CircleAvatar(

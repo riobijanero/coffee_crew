@@ -21,7 +21,7 @@ class AnimatedProfilePicture extends StatelessWidget {
       animation: _screenController,
       builder: (BuildContext context, Widget child) {
         return Container(
-          margin: EdgeInsets.symmetric(vertical: 20),
+          margin: const EdgeInsets.symmetric(vertical: 20),
           child: Column(
             children: <Widget>[
               Text(
@@ -32,7 +32,7 @@ class AnimatedProfilePicture extends StatelessWidget {
                     fontWeight: FontWeight.w300,
                     color: Colors.white),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
                 child: Column(
                   children: [
@@ -47,7 +47,7 @@ class AnimatedProfilePicture extends StatelessWidget {
                                 fontWeight: FontWeight.w400,
                                 color: Colors.white)),
                       ),
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         color: const Color.fromRGBO(80, 210, 194, 1.0),
                       ),

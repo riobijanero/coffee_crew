@@ -25,7 +25,7 @@ class _CoffeeListState extends State<CoffeeList> with TickerProviderStateMixin {
   static List<Coffee> _initialList = [];
   List<Coffee> _coffeeList;
 
-  Duration _listRenderDelayDuration = Duration(milliseconds: 150);
+  Duration _listRenderDelayDuration = const Duration(milliseconds: 150);
 
   bool hasListViewAnimatedAlready;
   int animatedlistItems = 0;

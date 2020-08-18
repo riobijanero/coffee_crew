@@ -9,7 +9,7 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
     return AnimatedSwitcher(
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       child: (user == null) ? AuthenticationWrapper() : Dashboard(),
     );
   }

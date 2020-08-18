@@ -32,7 +32,7 @@ class AnimatedLoadingButton extends StatelessWidget {
                   height: buttonHeight,
                   alignment: FractionalOffset.center,
                   decoration: BoxDecoration(
-                      color: Color.fromRGBO(247, 64, 106, 1.0),
+                      color: const Color.fromRGBO(247, 64, 106, 1.0),
                       borderRadius:
                           BorderRadius.all(const Radius.circular(30.0))),
                   child: buttonSqueezeAnimation.value > 75.0

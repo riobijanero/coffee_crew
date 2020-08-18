@@ -15,7 +15,6 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
   DashBoardController _dashBoardController;
   AnimationController _screenController;
   AnimationController _buttonController;
-  Animation<Alignment> buttonBottomtoCenterAnimation;
   Animation buttonZoomOutAnimation;
 
   Animation<double> containerGrowAnimation;
@@ -30,17 +29,17 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
 
   Animation<double> buttonZoomoutAnimation;
 
-  static const profileImage = ExactAssetImage('assets/bijan.png');
+  static const profileImage = const ExactAssetImage('assets/bijan.png');
 
   @override
   void initState() {
     super.initState();
     _screenController = AnimationController(
-      duration: Duration(milliseconds: 2000),
+      duration: const Duration(milliseconds: 2000),
       vsync: this,
     );
     _buttonController = AnimationController(
-      duration: Duration(milliseconds: 700),
+      duration: const Duration(milliseconds: 700),
       vsync: this,
     );
 
@@ -98,40 +97,19 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
       ),
     );
 
-    buttonBottomtoCenterAnimation = AlignmentTween(
-      begin: Alignment.bottomRight,
-      end: Alignment.center,
-    ).animate(
-      CurvedAnimation(
-        parent: _buttonController,
-        curve: Interval(
-          0.0,
-          0.200,
-          curve: Curves.easeOut,
-        ),
-      ),
-    );
-
-    buttonZoomOutAnimation = Tween(
-      begin: 60.0,
-      end: 1000.0,
-    ).animate(
-      CurvedAnimation(parent: _buttonController, curve: Curves.easeOut),
-    );
-
     buttonSqueezeAnimation = Tween(
       begin: 160.0,
       end: 60.0,
     ).animate(CurvedAnimation(
         parent: _buttonController,
-        curve: Interval(0.0, 0.250, curve: Curves.linearToEaseOut)));
+        curve: const Interval(0.0, 0.250, curve: Curves.linearToEaseOut)));
 
     buttonZoomoutAnimation = Tween(
       begin: 70.0,
       end: 1000.0,
     ).animate(CurvedAnimation(
       parent: _buttonController,
-      curve: Interval(0.550, 0.900, curve: Curves.bounceOut),
+      curve: const Interval(0.550, 0.900, curve: Curves.bounceOut),
     ));
 
     slideUpAnimation = Tween<double>(
@@ -139,7 +117,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
       end: 0.90,
     ).animate(CurvedAnimation(
       parent: _screenController,
-      curve: Interval(
+      curve: const Interval(
         0.325,
         0.700,
         curve: Curves.linearToEaseOut,
@@ -167,16 +145,21 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
         value: _dashBoardController
             .coffees, // <- this streams wraps the rest of thwdiget tree
         child: Scaffold(
-            backgroundColor: Colors.brown[50],
+            backgroundColor: Color(0xFF6CA8F1),
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0.0,
               actions: <Widget>[
                 FlatButton.icon(
-                  onPressed: () => _onEditOrderButtonPressed(context),
-                  icon: Icon(Icons.settings),
-                  label: Text(_dashBoardController.settingsButtonLabel),
-                )
+                    onPressed: () => _onEditOrderButtonPressed(context),
+                    icon: Icon(
+                      Icons.settings,
+                      color: Colors.white,
+                    ),
+                    label: Text(
+                      _dashBoardController.settingsButtonLabel,
+                      style: TextStyle(color: Colors.white),
+                    ))
               ],
             ),
             body: LayoutBuilder(
@@ -186,7 +169,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
                     Container(
                       height: constrains.maxHeight,
                       child: SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: <Widget>[
@@ -229,53 +212,3 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
     _buttonController.dispose();
   }
 }
-
-// class AnimatedLogoutButton extends StatelessWidget {
-//   const AnimatedLogoutButton({
-//     Key key,
-//     @required AnimationController buttonController,
-//     @required this.buttonZoomOutAnimation,
-//     @required this.buttonBottomtoCenterAnimation,
-//     this.ontap,
-//   })  : _buttonController = buttonController,
-//         super(key: key);
-
-//   final AnimationController _buttonController;
-//   final Animation buttonZoomOutAnimation;
-//   final Animation<Alignment> buttonBottomtoCenterAnimation;
-//   final void Function() ontap;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return AnimatedBuilder(
-//       animation: _buttonController,
-//       builder: (BuildContext context, Widget child) {
-//         return Container(
-
-//             // alignment: Alignment
-//             //     .bottomRight, // buttonBottomtoCenterAnimation.value,
-//             child: GestureDetector(
-//           onTap: () async => ontap(),
-//           child: Container(
-//             width: buttonZoomOutAnimation.value,
-//             height: buttonZoomOutAnimation.value,
-//             alignment: buttonBottomtoCenterAnimation.value,
-//             decoration: BoxDecoration(
-//               color: const Color.fromRGBO(247, 64, 106, 1.0),
-//               shape: buttonZoomOutAnimation.value < 100
-//                   ? BoxShape.circle
-//                   : BoxShape.rectangle,
-//             ),
-//             child: Icon(
-//               Icons.add,
-//               size: buttonZoomOutAnimation.value < 50
-//                   ? buttonZoomOutAnimation.value
-//                   : 0.0,
-//               color: Colors.white,
-//             ),
-//           ),
-//         ));
-//       },
-//     );
-//   }
-// }

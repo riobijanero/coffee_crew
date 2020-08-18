@@ -83,7 +83,7 @@ class _RegisterPageState extends State<RegisterPage>
         backgroundColor: Color(0xFF73AEF5),
         body: SingleChildScrollView(
           physics: AlwaysScrollableScrollPhysics(),
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: 40.0,
             vertical: 120.0,
           ),
@@ -95,30 +95,29 @@ class _RegisterPageState extends State<RegisterPage>
                 Text(
                   'Register For Coffee Crew',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontFamily: 'OpenSans',
                     fontSize: 28.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 40.0),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 60.0),
                 LabeledTextfield(
                   labeltext: 'Email',
                   hintText: 'Enter your Email',
-                  icon: Icon(Icons.email, color: Colors.white),
+                  icon: const Icon(Icons.email, color: Colors.white),
                   obscureText: false,
                   validator: (value) =>
                       _authenticationController.validateEmailField(value),
                   onChanged: (value) => setState(() => email = value),
                 ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 LabeledTextfield(
                   texteditController: _passwordController,
                   labeltext: 'Password',
                   hintText: 'Enter a Password',
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.lock,
                     color: Colors.white,
                   ),
@@ -139,12 +138,12 @@ class _RegisterPageState extends State<RegisterPage>
                       _authenticationController.validatePasswordField(value),
                   onChanged: (value) => setState(() => password = value),
                 ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 LabeledTextfield(
                   texteditController: _repeatPasswordController,
                   labeltext: 'Repeat Password',
                   hintText: 'Repeat Password',
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.lock,
                     color: Colors.white,
                   ),
@@ -168,7 +167,7 @@ class _RegisterPageState extends State<RegisterPage>
                   },
                   onChanged: (value) => setState(() => repeatPassword = value),
                 ),
-                SizedBox(height: 40.0),
+                const SizedBox(height: 40.0),
                 AnimatedLoadingButton(
                   buttonController: _loginButtonController,
                   buttonSqueezeAnimation: buttonSqueezeAnimation,
@@ -176,12 +175,12 @@ class _RegisterPageState extends State<RegisterPage>
                   onTab: () => onPress(_authenticationController),
                   buttontext: 'Register',
                 ),
-                SizedBox(height: 25.0),
+                const SizedBox(height: 25.0),
                 Text(
                   _authenticationController.signInErrorMessage,
-                  style: TextStyle(color: Colors.red, fontSize: 16.0),
+                  style: const TextStyle(color: Colors.red, fontSize: 16.0),
                 ),
-                SizedBox(height: 25.0),
+                const SizedBox(height: 25.0),
                 GestureDetector(
                   onTap: () => onSignInButtonPressed(_authenticationController),
                   child: RichText(
@@ -189,7 +188,7 @@ class _RegisterPageState extends State<RegisterPage>
                       children: [
                         TextSpan(
                           text: 'Already have an Account? ',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18.0,
                             fontWeight: FontWeight.w400,
@@ -197,7 +196,7 @@ class _RegisterPageState extends State<RegisterPage>
                         ),
                         TextSpan(
                           text: 'Sign in',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
