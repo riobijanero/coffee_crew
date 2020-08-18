@@ -75,7 +75,7 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
     return Consumer<AuthenticationController>(
         builder: (context, _authenticationController, child) {
       return Scaffold(
-        backgroundColor: Color(0xFF73AEF5),
+        backgroundColor: const Color(0xFF6CA8F1),
         body: SingleChildScrollView(
           physics: AlwaysScrollableScrollPhysics(),
           padding: EdgeInsets.symmetric(
@@ -97,21 +97,21 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 40.0),
+                const SizedBox(height: 40.0),
                 LabeledTextfield(
                   labeltext: 'Email',
                   hintText: 'Enter your Email',
-                  icon: Icon(Icons.email, color: Colors.white),
+                  icon: const Icon(Icons.email, color: Colors.white),
                   fillColor: Color(0xFF6CA8F1),
                   validator: (value) =>
                       _authenticationController.validateEmailField(value),
                   onChanged: (value) => setState(() => email = value),
                 ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 LabeledTextfield(
                   labeltext: 'Password',
                   hintText: 'Enter a Password',
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.lock,
                     color: Colors.white,
                   ),
@@ -132,7 +132,7 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
                       _authenticationController.validatePasswordField(value),
                   onChanged: (value) => setState(() => password = value),
                 ),
-                SizedBox(height: 40.0),
+                const SizedBox(height: 40.0),
                 AnimatedLoadingButton(
                   buttonController: _loginButtonController,
                   buttonSqueezeAnimation: buttonSqueezeAnimation,
@@ -140,12 +140,12 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
                   onTab: () => onPress(_authenticationController),
                   buttontext: 'Sign in',
                 ),
-                SizedBox(height: 25.0),
+                const SizedBox(height: 25.0),
                 Text(
                   _authenticationController.signInErrorMessage,
-                  style: TextStyle(color: Colors.red, fontSize: 16.0),
+                  style: const TextStyle(color: Colors.red, fontSize: 16.0),
                 ),
-                SizedBox(height: 25.0),
+                const SizedBox(height: 25.0),
                 GestureDetector(
                   onTap: () =>
                       onRegisterButtonPressed(_authenticationController),
@@ -154,7 +154,7 @@ class _SignInPageState extends State<SignInPage> with TickerProviderStateMixin {
                       children: [
                         TextSpan(
                           text: 'Don\'t have an Account? ',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18.0,
                             fontWeight: FontWeight.w400,
