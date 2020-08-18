@@ -1,16 +1,14 @@
 # coffee_crew
 
-A new Flutter project.
+An Flutter app that can be used as a digital  estimating effort or complexity. The project is  makes extensive use of Flutters explicit Animatations.
 
-## Getting Started
+The project uses Firebase as a backend (Authentication and Database).
 
-This project is a starting point for a Flutter application.
+## Versions used
+Flutter: 1.17.3
+Dart: 2.8.4
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+![](screenshots/login-screen.gif) ![](screenshots/edit-screen.gif) ![](screenshots/logout-screen.gif)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
