@@ -9,6 +9,6 @@ Flutter: 1.17.3
 Dart: 2.8.4
 
 
-![](screenshots/login-screen.gif) ![](screenshots/edit-screen.gif) ![](screenshots/logout-screen.gif)
+![](assets/screenshots/login-screen.gif) ![](assets/screenshots/edit-screen.gif) ![](assets/screenshots/logout-screen.gif)
 
 
