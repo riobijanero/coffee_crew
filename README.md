@@ -1,6 +1,9 @@
 # coffee_crew
 
-An Flutter app that can be used as a digital  estimating effort or complexity. The project is  makes extensive use of Flutters explicit Animatations.
+A cross platform Flutter app that can be used as a digital order sheet for coffee orders.
+Each user can edit their coffee settings dynamically. The data is then updated via a stream.
+
+The project makes extensive use of Flutters explicit Animatations.
 
 The project uses Firebase as a backend (Authentication and Database).
 
